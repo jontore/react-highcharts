@@ -30,9 +30,9 @@ module.exports = function (chartType, Highcharts){
       }, this.props.callback);
 
       if (!this.props.neverReflow) {
-        global.requestAnimationFrame && requestAnimationFrame(()=>{
-          this.chart && this.chart.options && this.chart.reflow();
-        });
+        // global.requestAnimationFrame && requestAnimationFrame(()=>{
+        //   this.chart && this.chart.options && this.chart.reflow();
+        // });
       }
     },
 

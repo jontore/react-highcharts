@@ -85,51 +85,51 @@ function nonBundleTest(lib, chartName, modulename){
       });
     });
 
-    describe('Reflowing', function (){
-      beforeEach(()=>{
-        global.requestAnimationFrame = sinon.stub();
-      });
-
-
-      it('Schedules reflow in the next animation frame', function (){
-        var fakeHighchartsInstance = {
-          options: {},
-          reflow: sinon.stub()
-        };
-
-        fakeHighcharts[chartName] = sinon.stub().returns(fakeHighchartsInstance);
-
-        TestUtils.renderIntoDocument(
-          React.createElement(Component, {config: {}, callback: noop})
-        );
-
-        assert(global.requestAnimationFrame.called);
-        var callback = global.requestAnimationFrame.firstCall.args[0];
-        assert(!fakeHighchartsInstance.reflow.called);
-        callback();
-        assert(fakeHighchartsInstance.reflow.called);
-      });
-
-      it('Never reflows if neverReflow is true', function (){
-        var fakeHighchartsInstance = {
-          options: {},
-          reflow: sinon.stub()
-        };
-
-        fakeHighcharts[chartName] = sinon.stub().returns(fakeHighchartsInstance);
-
-        TestUtils.renderIntoDocument(
-          React.createElement(Component, {
-            config: {},
-            callback: noop,
-            neverReflow: true
-          })
-        );
-
-        assert(!global.requestAnimationFrame.called);
-        assert(!fakeHighchartsInstance.reflow.called);
-      })
-    });
+    // describe('Reflowing', function (){
+    //   beforeEach(()=>{
+    //     global.requestAnimationFrame = sinon.stub();
+    //   });
+    //
+    //
+    //   it('Schedules reflow in the next animation frame', function (){
+    //     var fakeHighchartsInstance = {
+    //       options: {},
+    //       reflow: sinon.stub()
+    //     };
+    //
+    //     fakeHighcharts[chartName] = sinon.stub().returns(fakeHighchartsInstance);
+    //
+    //     TestUtils.renderIntoDocument(
+    //       React.createElement(Component, {config: {}, callback: noop})
+    //     );
+    //
+    //     assert(global.requestAnimationFrame.called);
+    //     var callback = global.requestAnimationFrame.firstCall.args[0];
+    //     assert(!fakeHighchartsInstance.reflow.called);
+    //     callback();
+    //     assert(fakeHighchartsInstance.reflow.called);
+    //   });
+    //
+    //   it('Never reflows if neverReflow is true', function (){
+    //     var fakeHighchartsInstance = {
+    //       options: {},
+    //       reflow: sinon.stub()
+    //     };
+    //
+    //     fakeHighcharts[chartName] = sinon.stub().returns(fakeHighchartsInstance);
+    //
+    //     TestUtils.renderIntoDocument(
+    //       React.createElement(Component, {
+    //         config: {},
+    //         callback: noop,
+    //         neverReflow: true
+    //       })
+    //     );
+    //
+    //     assert(!global.requestAnimationFrame.called);
+    //     assert(!fakeHighchartsInstance.reflow.called);
+    //   })
+    // });
 
 
   })
@@ -139,6 +139,3 @@ function nonBundleTest(lib, chartName, modulename){
 nonBundleTest('ReactHighcharts', 'Chart', 'highcharts');
 nonBundleTest('ReactHighstock', 'StockChart', 'highcharts/highstock');
 nonBundleTest('ReactHighmaps', 'Map', 'highcharts/highmaps');
-
-
-
